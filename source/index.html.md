@@ -2,10 +2,7 @@
 title: API Reference
 
 language_tabs:
-  - shell
-  - ruby
-  - python
-  - javascript
+  - php
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -29,41 +26,30 @@ This example API documentation page was created with [Slate](https://github.com/
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
+```php
+$http = new GuzzleHttp\Client;
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+$response = $http->post('http://your-app.com/oauth/token', [
+    'form_params' => [
+        'grant_type' => 'password',
+        'client_id' => 'client-id',
+        'client_secret' => 'client-secret',
+        'username' => 'taylor@laravel.com',
+        'password' => 'my-password',
+        'scope' => '',
+    ],
+]);
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
+return json_decode((string) $response->getBody(), true);
 ```
 
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+Cloudscene uses oauth2 to allow access to the API. 
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+Cloudscene expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+`Authorization: Bearer [bearer code]`
 
 # Kittens
 
